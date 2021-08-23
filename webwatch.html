@@ -1,0 +1,90 @@
+<html>
+<head>
+    <title>Digital Clock using JavaScript</title>
+
+    <style>
+        .tabBlock
+        {
+            background-color:grey;
+            border:solid 10px orange;
+            border-radius:5px;
+            max-width:200px;
+            width:100%;
+            overflow:hidden;
+            display:block;
+        }
+        .clock
+        {
+            vertical-align:middle;
+            font-size:40px;
+            font-weight:normal;
+            color:whitesmoke;
+            padding:0 10px;
+        }
+        .clocklg 
+        {
+            vertical-align:middle; 
+            font-size:20px;
+            font-weight:normal;
+            color:whitesmoke;
+        }
+        
+        #ss{
+             background-color:skyblue;
+            max-width:220px;
+            width:100%;
+            margin:0 auto;
+            margin-top: 240px;
+            padding:20px;
+        }
+    </style>
+</head>
+
+<body onload="digitized();" style="background:darkseagreen">
+    <div id="ss">
+        <table class="tabBlock" align="center" >
+            <tr><td class="clock" id="dc"></td>
+                <td>
+                    <table>
+                        <tr><td class="clocklg" id="dc_hour"></td></tr>
+                        <tr><td class="clocklg" id="dc_second"></td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+<script>
+    function digitized() {
+        var dt = new Date();    // DATE() CONSTRUCTOR FOR CURRENT SYSTEM DATE AND TIME.
+        var hrs = dt.getHours();
+        var min = dt.getMinutes();
+        var sec = dt.getSeconds();
+
+        min = Ticking(min);
+        sec = Ticking(sec);
+
+        document.getElementById('dc').innerHTML = hrs + ":" + min;
+        document.getElementById('dc_second').innerHTML = sec;
+
+        if (hrs > 12) { 
+            document.getElementById('dc_hour').innerHTML = 'PM'; 
+        }
+        else { 
+            document.getElementById('dc_hour').innerHTML = 'AM'; 
+        }
+
+        // CALL THE FUNCTION EVERY 1 SECOND (RECURSION).
+        var time
+        time = setInterval('digitized()', 100);
+    }
+
+    function Ticking(ticVal) {
+        if (ticVal < 10) {
+            ticVal = "0" + ticVal;
+        }
+        return ticVal;
+    }
+</script>
+</html>
